@@ -1,5 +1,6 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 type Query {
     allSections: [Section]
@@ -9,4 +10,7 @@ type Section {
     id: ID!
     intitule: String
     taux: Int
+}
+type Mutation {
+    createSection(intitule: String!, taux: Int!): Section
 }

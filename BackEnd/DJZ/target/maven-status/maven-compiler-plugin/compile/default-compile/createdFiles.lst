@@ -1,4 +1,5 @@
 com/djz/classes/Query.class
+com/djz/classes/Mutation.class
 com/djz/classes/Section.class
 com/djz/classes/GraphQLEndpoint.class
 com/djz/classes/Sections.class

@@ -1,21 +1,48 @@
 package com.djz.classes;
 
+import com.mongodb.client.MongoCollection;
+
 import java.util.ArrayList;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import java.util.List;
+import org.bson.Document;
+import org.jetbrains.annotations.NotNull;
+
+import static com.mongodb.client.model.Filters.eq;
+
 
 public class Sections {
-    private List<Section> sections;
+    private final MongoCollection<Document> sections;
 
-    public Sections() {
-       sections=new ArrayList<Section>();
-       sections.add(new Section("Sedour",15));
-       sections.add(new Section("moulage",15));
+    public Sections(MongoCollection<Document> sections) {
+          this.sections=sections;
+    }
+
+    public Section findById(String id) {
+        Document doc = sections.find(eq("_id", new ObjectId(id))).first();
+        return Section(doc);
+    }
+
+    private Section Section(Document doc) {
+        return new Section(
+                doc.get("_id").toString(),
+                doc.getString("intitule"),
+                doc.getInteger("taux"));
     }
 
     public List<Section> getAllSections(){
-        return sections;
+        List<Section> allSections=new ArrayList<>();
+        for (Document doc :sections.find()){
+            allSections.add(Section(doc));
+        }
+        return allSections;
     }
+
     public void saveSection(Section section){
-        sections.add(section);
+        Document doc=new Document();
+        doc.append("intitule",section.getIntitule());
+        doc.append("taux",section.getTaux());
+        sections.insertOne(doc);
     }
 }
