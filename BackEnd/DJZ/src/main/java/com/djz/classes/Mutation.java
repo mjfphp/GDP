@@ -7,9 +7,17 @@ class Mutation implements GraphQLRootResolver {
     public Mutation(Sections sections){
         this.sections=sections;
     }
+
     public Section createSection(String intitule,int taux){
         Section newSection=new Section(intitule,taux);
         sections.saveSection(newSection);
         return newSection;
     }
+
+    public Section deleteSection(String id){
+        Section section=sections.findById(id);
+        sections.deleteSection(id);
+        return section;
+    }
+
 }

@@ -13,4 +13,5 @@ type Section {
 }
 type Mutation {
     createSection(intitule: String!, taux: Int!): Section
+    deleteSection(id: String!): Section
 }

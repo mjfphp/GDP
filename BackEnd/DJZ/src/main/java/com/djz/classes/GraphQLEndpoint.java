@@ -23,7 +23,10 @@ import javax.servlet.annotation.WebServlet;
         private static GraphQLSchema buildSchema() {
             return (SchemaParser.newParser()
                     .file("schema.graphqls") //parse the schema file created earlier
-                    .resolvers(new Query(sections),new Mutation(sections))
+                    .resolvers(
+                            new Query(sections),
+                            new Mutation(sections)
+                    )
                     .build()
                     .makeExecutableSchema());
         }

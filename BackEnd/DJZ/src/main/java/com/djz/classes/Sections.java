@@ -3,6 +3,8 @@ package com.djz.classes;
 import com.mongodb.client.MongoCollection;
 
 import java.util.ArrayList;
+
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import java.util.List;
@@ -45,4 +47,7 @@ public class Sections {
         doc.append("taux",section.getTaux());
         sections.insertOne(doc);
     }
+   public void deleteSection(String id){
+        sections.deleteOne(Filters.eq("_id", new ObjectId(id)));
+   }
 }
