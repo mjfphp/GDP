@@ -5,6 +5,8 @@ import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.model.Updates;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.bson.Document;
 import org.jetbrains.annotations.NotNull;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.*;
 
 
 public class Sections {
@@ -50,4 +53,9 @@ public class Sections {
    public void deleteSection(String id){
         sections.deleteOne(Filters.eq("_id", new ObjectId(id)));
    }
+    public void updateSection(String id,String intitule,int taux){
+        sections.updateOne(eq("_id",new ObjectId(id)),
+                combine(set("intitule",intitule),set("taux",taux))
+        );
+    }
 }
