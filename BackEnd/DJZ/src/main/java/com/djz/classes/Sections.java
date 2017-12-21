@@ -33,7 +33,8 @@ public class Sections {
         return new Section(
                 doc.get("_id").toString(),
                 doc.getString("intitule"),
-                doc.getInteger("taux"));
+                doc.getInteger("taux")
+        );
     }
 
     public List<Section> getAllSections(){
@@ -55,7 +56,10 @@ public class Sections {
    }
     public void updateSection(String id,String intitule,int taux){
         sections.updateOne(eq("_id",new ObjectId(id)),
-                combine(set("intitule",intitule),set("taux",taux))
+                combine(
+                        set("intitule",intitule),
+                        set("taux",taux)
+                )
         );
     }
 }

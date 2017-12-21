@@ -4,7 +4,10 @@ import com.coxautodev.graphql.tools.GraphQLRootResolver;
 
 class Mutation implements GraphQLRootResolver {
     private Sections sections;
-    public Mutation(Sections sections){
+    private Params params;
+    public Mutation(Sections sections,Params params)
+    {
+        this.params=params;
         this.sections=sections;
     }
 
@@ -26,5 +29,20 @@ class Mutation implements GraphQLRootResolver {
         return section;
     }
 
-
+    // Side Params :
+    public Param createParam(int dm, int dh, int ao, int fg, int it, int be, int tfa){
+        Param newParam=new Param(dm,dh,ao,fg,it,be,tfa);
+        params.saveParam(newParam);
+        return newParam;
+    }
+    public Param deleteParam(String id){
+        Param param=params.findById(id);
+        params.deleteParam(id);
+        return param;
+    }
+    public Param updateParam(String id, int dm, int dh, int ao, int fg, int it, int be, int tfa){
+        Param param=params.findById(id);
+        params.updateParam(id,dm,dh,ao,fg,it,be,tfa);
+        return param;
+    }
 }

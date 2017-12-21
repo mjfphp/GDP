@@ -4,6 +4,18 @@ schema {
 }
 type Query {
     allSections: [Section]
+    allParams: [Param]
+}
+
+type Param {
+    id: ID!
+    dm: Int!
+    dh: Int!
+    ao: Int!
+    fg: Int!
+    it: Int!
+    be: Int!
+    tfa: Int!
 }
 
 type Section {
@@ -11,8 +23,17 @@ type Section {
     intitule: String
     taux: Int
 }
+
 type Mutation {
+    #Section side
     createSection(intitule: String!, taux: Int!): Section
     deleteSection(id: String!): Section
     updateSection(id: String!,intitule: String!,taux: Int!): Section
+
+
+    #Param Side
+    createParam( dm: Int!,dh: Int!,ao: Int!,fg: Int!,it: Int!,be: Int!,tfa: Int!): Param
+    deleteParam(id: String!): Param
+    updateParam(id: String!,dm: Int!,dh: Int!,ao: Int!,fg: Int!,it: Int!,be: Int!,tfa: Int!): Param
+
 }
