@@ -13,11 +13,13 @@ import javax.servlet.annotation.WebServlet;
     public class GraphQLEndpoint extends SimpleGraphQLServlet {
         private static final Sections sections;
         private static final Params params;
+        private static final Articles articles;
         static {
 
             MongoDatabase mongo = new MongoClient().getDatabase("gdp");
             sections = new Sections(mongo.getCollection("sections"));
             params = new Params(mongo.getCollection("params"));
+            articles = new Articles(mongo.getCollection("articles"));
         }
         public GraphQLEndpoint() {
             super(buildSchema());
@@ -26,8 +28,8 @@ import javax.servlet.annotation.WebServlet;
             return (SchemaParser.newParser()
                     .file("schema.graphqls") //parse the schema file created earlier
                     .resolvers(
-                            new Query(sections,params),
-                            new Mutation(sections,params)
+                            new Query(sections,params,articles),
+                            new Mutation(sections,params,articles)
                     )
                     .build()
                     .makeExecutableSchema());

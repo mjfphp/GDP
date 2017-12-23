@@ -5,17 +5,28 @@ schema {
 type Query {
     allSections: [Section]
     allParams: [Param]
+    allArticles: [Article]
+}
+
+type Article{
+    id: ID!
+    ref: String
+    nom: String
+    des: String
+    prix: Float
+    poids: Float
+    um: String
 }
 
 type Param {
     id: ID!
-    dm: Int!
-    dh: Int!
-    ao: Int!
-    fg: Int!
-    it: Int!
-    be: Int!
-    tfa: Int!
+    dm: Int
+    dh: Int
+    ao: Int
+    fg: Int
+    it: Int
+    be: Int
+    tfa: Int
 }
 
 type Section {
@@ -26,14 +37,20 @@ type Section {
 
 type Mutation {
     #Section side
-    createSection(intitule: String!, taux: Int!): Section
+    createSection(intitule: String!, taux: Int): Section
     deleteSection(id: String!): Section
     updateSection(id: String!,intitule: String!,taux: Int!): Section
 
 
     #Param Side
-    createParam( dm: Int!,dh: Int!,ao: Int!,fg: Int!,it: Int!,be: Int!,tfa: Int!): Param
+    createParam(dm: Int!,dh: Int!,ao: Int!,fg: Int!,it: Int!,be: Int!,tfa: Int!): Param
     deleteParam(id: String!): Param
     updateParam(id: String!,dm: Int!,dh: Int!,ao: Int!,fg: Int!,it: Int!,be: Int!,tfa: Int!): Param
+
+    #Article Side
+    createArticle(ref: String!,nom: String!,des: String!,prix: Float!,poids: Float!,um: String!): Article
+    updateArticle(id: ID!,ref: String!,nom: String!,des: String!,prix: Float!,poids: Float!,um: String!): Article
+    deleteArticle(id: String!): Article
+
 
 }
